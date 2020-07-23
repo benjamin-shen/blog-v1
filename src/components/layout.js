@@ -1,16 +1,13 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
+import moment from "moment-timezone"
+
 import Header from "./header"
 import "./layout.css"
+
+moment.tz.setDefault("America/New_York")
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -35,9 +32,9 @@ const Layout = ({ children }) => {
       >
         <main>{children}</main>
         <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+          <div style={{ textAlign: `center` }}>
+            © {moment().year() || ""} Benjamin Shen
+          </div>
         </footer>
       </div>
     </>
