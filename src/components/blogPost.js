@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 
 import moment from "moment-timezone"
 import marked from "marked"
-import DOMPurify from "dompurify"
+import sanitize from "sanitize-html"
 
 import Layout from "./layout"
 import SEO from "./seo"
@@ -38,8 +38,8 @@ const BlogPost = ({ data }) => {
   } = data
   const convertToHTML = text => {
     if (text) {
-      const markdown = marked(text, { sanitize: true })
-      const cleanHTML = DOMPurify.sanitize(markdown)
+      const markdown = marked(text)
+      const cleanHTML = sanitize(markdown)
       return { __html: cleanHTML }
     }
     return null
