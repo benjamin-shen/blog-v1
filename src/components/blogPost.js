@@ -48,7 +48,6 @@ const BlogPost = ({ data }) => {
     <Layout>
       <SEO title={title || "Post"} />
       <div
-        className="container"
         style={{ fontFamily: `"Helvetica Neue", Helvetica, Arial, sans-serif` }}
       >
         <h1>{title}</h1>
