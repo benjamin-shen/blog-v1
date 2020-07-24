@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import moment from "moment-timezone"
 import marked from "marked"
 import sanitize from "sanitize-html"
+import readTimeEstimate from "read-time-estimate"
 
 import Layout from "./layout"
 import SEO from "./seo"
@@ -39,11 +40,27 @@ const BlogPost = ({ data }) => {
   const convertToHTML = text => {
     if (text) {
       const markdown = marked(text)
-      const cleanHTML = sanitize(markdown)
+      const cleanHTML = sanitize(markdown, {
+        allowedTags: sanitize.defaults.allowedTags.concat(["h2", "img"]),
+        allowedAttributes: {
+          a: ["href", "name", "target"],
+          img: ["src"],
+        },
+      })
       return { __html: cleanHTML }
     }
     return null
   }
+
+  const blurbHTML = convertToHTML(blurb)
+  const contentHTML = convertToHTML(content)
+  const { humanizedDuration } = readTimeEstimate(
+    blurbHTML.__html + contentHTML.__html,
+    275,
+    12,
+    500,
+    ["img"]
+  )
   return (
     <Layout>
       <SEO title={title || "Post"} />
@@ -51,14 +68,17 @@ const BlogPost = ({ data }) => {
         style={{ fontFamily: `"Helvetica Neue", Helvetica, Arial, sans-serif` }}
       >
         <h1>{title}</h1>
-        <h2 style={{ fontSize: `1em` }}>
-          {date && "Written " + new Date(moment(date)).toLocaleDateString()}
-        </h2>
+        <p style={{ fontSize: `1em`, marginBottom: 0 }}>
+          {date && "Date: " + new Date(moment(date)).toLocaleDateString()}
+        </p>
+        <p style={{ fontSize: `1em` }}>
+          {humanizedDuration && "Read time: " + humanizedDuration}
+        </p>
         <div
-          dangerouslySetInnerHTML={convertToHTML(blurb)}
+          dangerouslySetInnerHTML={blurbHTML}
           style={{ marginTop: `20px` }}
         />
-        <div dangerouslySetInnerHTML={convertToHTML(content)} />
+        <div dangerouslySetInnerHTML={contentHTML} />
       </div>
     </Layout>
   )
