@@ -53,7 +53,6 @@ const PostPreviews = () => {
             <div
               role="button"
               className="post-preview bg-light hoverable"
-              style={{ padding: `20px`, marginBottom: `20px` }}
               onClick={() => {
                 navigate("/posts/" + slug)
               }}
