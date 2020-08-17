@@ -5,7 +5,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import moment from "moment-timezone"
 
 import Header from "./header"
-import "./layout.css"
+import "../styles/layout.css"
 
 moment.tz.setDefault("America/New_York")
 
@@ -35,7 +35,8 @@ const Layout = ({ children }) => {
         </main>
         <footer>
           <div style={{ textAlign: `center` }}>
-            © {moment().year() || ""} Benjamin Shen
+            © {moment().year() || ""}{" "}
+            <a href="https://benjaminshen.com">Benjamin Shen</a>
           </div>
         </footer>
       </div>

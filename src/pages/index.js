@@ -1,16 +1,14 @@
 import React from "react"
-import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import PostPreview from "../components/postPreview"
+import PostPreviews from "../components/postPreviews"
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <PostPreview />
-    <Link to="posts/cornell-dining-reservation-system">Go to post</Link>
+    <PostPreviews />
   </Layout>
 )
 

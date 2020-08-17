@@ -26,6 +26,24 @@ export const query = graphql`
     }
   }
 `
+export const convertToHTML = text => {
+  if (text) {
+    const markdown = marked(text)
+    const cleanHTML = sanitize(markdown, {
+      allowedTags: sanitize.defaults.allowedTags.concat(["h2", "img"]),
+      allowedAttributes: {
+        a: ["href", "name", "target"],
+        img: ["src"],
+      },
+    })
+    return { __html: cleanHTML }
+  }
+  return null
+}
+export const getReadTime = html => {
+  const { humanizedDuration } = readTimeEstimate(html)
+  return humanizedDuration
+}
 
 const BlogPost = ({ data }) => {
   const {
@@ -37,30 +55,10 @@ const BlogPost = ({ data }) => {
       tags,
     },
   } = data
-  const convertToHTML = text => {
-    if (text) {
-      const markdown = marked(text)
-      const cleanHTML = sanitize(markdown, {
-        allowedTags: sanitize.defaults.allowedTags.concat(["h2", "img"]),
-        allowedAttributes: {
-          a: ["href", "name", "target"],
-          img: ["src"],
-        },
-      })
-      return { __html: cleanHTML }
-    }
-    return null
-  }
 
   const blurbHTML = convertToHTML(blurb)
   const contentHTML = convertToHTML(content)
-  const { humanizedDuration } = readTimeEstimate(
-    blurbHTML.__html + contentHTML.__html,
-    275,
-    12,
-    500,
-    ["img"]
-  )
+  const readTime = getReadTime(blurbHTML.__html + contentHTML.__html)
   return (
     <Layout>
       <SEO title={title || "Post"} />
@@ -72,7 +70,7 @@ const BlogPost = ({ data }) => {
           {date && "Date: " + new Date(moment(date)).toLocaleDateString()}
         </p>
         <p style={{ fontSize: `1em` }}>
-          {humanizedDuration && "Read time: " + humanizedDuration}
+          {readTime && "Read time: " + readTime}
         </p>
         <div
           dangerouslySetInnerHTML={blurbHTML}
