@@ -27,7 +27,7 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",
     "read-time-estimate": "^0.0.2",
-    "sanitize-html": "^1.27.1"
+    "sanitize-html": "^2.3.2"
   },
   "devDependencies": {
     "prettier": "2.0.5"
