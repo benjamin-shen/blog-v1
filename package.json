@@ -19,7 +19,7 @@
     "gatsby-source-filesystem": "^2.3.14",
     "gatsby-transformer-remark": "^2.8.28",
     "gatsby-transformer-sharp": "^2.5.7",
-    "marked": "^2.0.0",
+    "marked": "^4.0.10",
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
     "prop-types": "^15.7.2",
