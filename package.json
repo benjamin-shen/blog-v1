@@ -20,7 +20,7 @@
     "gatsby-transformer-remark": "^2.8.28",
     "gatsby-transformer-sharp": "^2.5.7",
     "marked": "^4.0.10",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "moment-timezone": "^0.5.31",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
