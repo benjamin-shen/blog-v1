@@ -1,24 +1,17 @@
 module.exports = {
   siteMetadata: {
-    title: `Benjamin Shen's Blog`,
+    title: `Gatsby Starter Blog`,
     author: {
-      name: `benjamin-shen`,
+      name: `Kyle Mathews`,
+      summary: `who lives and works in San Francisco building useful things.`,
     },
-    siteUrl: `https://blog.benjaminshen.com`,
+    description: `A starter blog demonstrating what Gatsby can do.`,
+    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
     social: {
-      git: `https://github.com/benjamin-shen`,
-      linkedin: `https://www.linkedin.com/in/benjaminfshen/`,
-      mail: `benjaminshen22+blog@gmail.com`,
+      twitter: `kylemathews`,
     },
   },
   plugins: [
-    `gatsby-plugin-netlify-cms`,
-    {
-      resolve: `gatsby-plugin-sass`,
-      options: {
-        additionalData: `@import "./src/styles/variables.scss"; @import "./src/styles/mixins.scss";`,
-      },
-    },
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -53,18 +46,11 @@ module.exports = {
           `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
-          'gatsby-remark-emoji',
         ],
       },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: `ADD YOUR TRACKING ID HERE`,
-    //   },
-    // },
     {
       resolve: `gatsby-plugin-feed`,
       options: {
@@ -82,15 +68,17 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) =>
-              allMarkdownRemark.nodes.map((node) => ({
-                ...node.frontmatter,
-                description: node.excerpt,
-                date: node.frontmatter.date,
-                url: site.siteMetadata.siteUrl + node.fields.slug,
-                guid: site.siteMetadata.siteUrl + node.fields.slug,
-                custom_elements: [{ 'content:encoded': node.html }],
-              })),
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.nodes.map(node => {
+                return Object.assign({}, node.frontmatter, {
+                  description: node.excerpt,
+                  date: node.frontmatter.date,
+                  url: site.siteMetadata.siteUrl + node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + node.fields.slug,
+                  custom_elements: [{ "content:encoded": node.html }],
+                })
+              })
+            },
             query: `
               {
                 allMarkdownRemark(
@@ -110,7 +98,8 @@ module.exports = {
                 }
               }
             `,
-            output: '/rss.xml',
+            output: "/rss.xml",
+            title: "Gatsby Starter Blog RSS Feed",
           },
         ],
       },
@@ -122,15 +111,12 @@ module.exports = {
         short_name: `GatsbyJS`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#663399`,
+        // This will impact how browsers show your PWA/website
+        // https://css-tricks.com/meta-theme-color-and-trickery/
+        // theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-gatsby-cloud`,
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
-};
+}
