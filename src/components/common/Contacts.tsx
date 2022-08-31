@@ -4,7 +4,7 @@ import instagram from '../../images/about/instagram.svg';
 import git from '../../images/about/git.svg';
 import twitter from '../../images/about/twitter.svg';
 import facebook from '../../images/about/facebook.svg';
-import linkdein from '../../images/about/linkdein.svg';
+import linkedin from '../../images/about/linkedin.svg';
 import circle from '../../images/about/circle.svg';
 
 import '../../styles/components/common/contacts.scss';
@@ -18,7 +18,7 @@ const Contacts = () => {
             git
             instagram
             twitter
-            linkdein
+            linkedin
             facebook
             mail
           }
@@ -46,7 +46,7 @@ const Contacts = () => {
         <SNSLinkItem url={'instagram'} img={instagram} />
         <SNSLinkItem url={'twitter'} img={twitter} />
         <SNSLinkItem url={'facebook'} img={facebook} />
-        <SNSLinkItem url={'linkdein'} img={linkdein} />
+        <SNSLinkItem url={'linkedin'} img={linkedin} />
       </div>
     </div>
   );

@@ -1,30 +1,18 @@
 module.exports = {
   siteMetadata: {
-    title: `GATSBY BLOG`,
+    title: `Benjamin Shen's Blog`,
     author: {
-      name: `jeongyun.lee`,
-      summary: `FE Engineer`,
-      selfIntroduction: `Hello, this is a place where you can introduce yourself. 
-      If you modify Gatsby-config,
-      you can customize it freely! Thank you.`,
+      name: `benjamin-shen`,
     },
-    description: `blog starter`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    siteUrl: `https://blog.benjaminshen.com`,
     social: {
-      git: `https://github.com`,
-      instagram: `https://www.instagram.com`,
-      twitter: `https://twitter.com/?lang=ko`,
-      linkdein: `https://kr.linkedin.com`,
-      facebook: `https://facebook.com`,
-      mail: `admin@gmail.com`,
-    },
-    commentInfo: {
-      service: 'utterances', // select utterances or disqus
-      disqusId: 'our-blog-starter', // your disqus shortname, check detail: disqus.com
-      utterancesId: 'react-sprint/gatsby-blog-starter-with-typescript', // your gatsby repository, check detail: utteranc.es
+      git: `https://github.com/benjamin-shen`,
+      linkedin: `https://www.linkedin.com/in/benjaminfshen/`,
+      mail: `benjaminshen22+blog@gmail.com`,
     },
   },
   plugins: [
+    `gatsby-plugin-netlify-cms`,
     {
       resolve: `gatsby-plugin-sass`,
       options: {
